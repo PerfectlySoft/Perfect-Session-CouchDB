@@ -1,4 +1,4 @@
-# Perfect Sessions (PostgreSQL Driver)
+# Perfect Sessions (CouchDB Driver)
 
 <p align="center">
     <a href="http://perfect.org/get-involved.html" target="_blank">
@@ -39,9 +39,9 @@
     </a>
 </p>
 
-The Perfect Session PostgreSQL Driver.
+The Perfect Session CouchDB Driver.
 
-Note that a demo is located at [https://github.com/PerfectExamples/Perfect-Session-PostgreSQL-Demo](https://github.com/PerfectExamples/Perfect-Session-PostgreSQL-Demo) that shows the operation of the PostgreSQL driver included in the core library.
+Note that a demo is located at [https://github.com/PerfectExamples/Perfect-Session-CouchDB-Demo](https://github.com/PerfectExamples/Perfect-Session-CouchDB-Demo) that shows the operation of the CouchDB driver included in the core library.
 
 ## Compatibility with Swift
 
@@ -52,7 +52,7 @@ The master branch of this project currently compiles with **Xcode 8.1** or the *
 Add this project as a dependency in your Package.swift file.
 
 ``` swift
-.Package(url:"https://github.com/PerfectlySoft/Perfect-Session-PostgreSQL.git", majorVersion: 0, minor: 0)
+.Package(url:"https://github.com/PerfectlySoft/Perfect-Session-CouchDB.git", majorVersion: 0, minor: 0)
 ```
 
 
