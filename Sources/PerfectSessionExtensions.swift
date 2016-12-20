@@ -26,6 +26,7 @@ class PerfectSessionClass: CouchDBStORM {
 	/// Idle time set at last update
 	var idle			= SessionConfig.idle
 	/// Data held in storage associated with session
+	//	var data			= "{}"
 	var data			= [String: Any]()
 
 	override open func database() -> String {
@@ -53,15 +54,22 @@ class PerfectSessionClass: CouchDBStORM {
 		self.updated = updated
 		self.idle = idle
 		self.data = data
+		//		do {
+		//			self.data = try data.jsonEncodedString()
+		//		} catch {
+		//			self.data = "{}"
+		//		}
 	}
 
 	override open func to(_ this: StORMRow) {
+		_rev		= this.data["_rev"] as? String ?? ""
 		id			= this.data["_id"] as? String ?? ""
 		token		= this.data["token"] as? String ?? ""
 		userid		= this.data["userid"] as? String ?? ""
 		created		= this.data["created"] as? Int ?? 0
 		updated		= this.data["updated"] as? Int ?? 0
 		idle		= this.data["idle"] as? Int ?? 0
+		//		data		= this.data["data"] as? String ?? "{}"
 		if let str = this.data["data"] {
 			data = try! (str as! String).jsonDecode() as! [String : Any]
 		}
@@ -76,5 +84,5 @@ class PerfectSessionClass: CouchDBStORM {
 		}
 		return rows
 	}
-
+	
 }

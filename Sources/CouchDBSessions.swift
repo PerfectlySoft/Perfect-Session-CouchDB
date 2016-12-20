@@ -25,6 +25,9 @@ public struct CouchDBSessions {
 		//find
 		do {
 			try proxy.find(["token":session.token])
+			if proxy.results.rows.isEmpty {
+				return
+			}
 			proxy.to(proxy.results.rows[0])
 		} catch {
 			print("Error retrieving session: \(error)")
@@ -34,8 +37,13 @@ public struct CouchDBSessions {
 		proxy.updated = s.updated
 		proxy.idle = SessionConfig.idle // update in case this has changed
 		proxy.data = s.data
+
 		// save
-		try? proxy.save()
+		do {
+			try proxy.save()
+		} catch {
+			print("Error saving session: \(error)")
+		}
 	}
 
 	public func start() -> PerfectSession {
@@ -77,6 +85,9 @@ public struct CouchDBSessions {
 		let proxy = PerfectSessionClass()
 		do {
 			try proxy.find(["token":token])
+			if proxy.results.rows.isEmpty {
+				return session
+			}
 			proxy.to(proxy.results.rows[0])
 
 			session.token = token
@@ -100,7 +111,7 @@ public struct CouchDBSessions {
 		}
 		return false
 	}
-
+	
 }
 
 
