@@ -29,6 +29,13 @@ class PerfectSessionClass: CouchDBStORM {
 	//	var data			= "{}"
 	var data			= [String: Any]()
 
+	/// IP Address of Session
+	var ipaddress		= ""
+
+	/// UserAgent of Session
+	var useragent		= ""
+
+	
 	override open func database() -> String {
 		return SessionConfig.couchDatabase
 	}
@@ -46,7 +53,7 @@ class PerfectSessionClass: CouchDBStORM {
 		if runSetup { try? setup() }
 	}
 
-	init(id: String = "", token: String, userid: String, created: Int, updated: Int, idle: Int, data: [String: Any] ){
+	init(id: String = "", token: String, userid: String, created: Int, updated: Int, idle: Int, data: [String: Any], ipaddress: String, useragent: String){
 		self.id = id
 		self.token = token
 		self.userid = userid
@@ -54,6 +61,8 @@ class PerfectSessionClass: CouchDBStORM {
 		self.updated = updated
 		self.idle = idle
 		self.data = data
+		self.ipaddress = ipaddress
+		self.useragent = useragent
 		//		do {
 		//			self.data = try data.jsonEncodedString()
 		//		} catch {
@@ -73,6 +82,8 @@ class PerfectSessionClass: CouchDBStORM {
 		if let str = this.data["data"] {
 			data = try! (str as! String).jsonDecode() as! [String : Any]
 		}
+		ipaddress		= this.data["ipaddress"] as? String ?? ""
+		useragent		= this.data["useragent"] as? String ?? ""
 	}
 
 	func rows() -> [PerfectSessionClass] {

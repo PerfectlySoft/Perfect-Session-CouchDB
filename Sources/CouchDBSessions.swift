@@ -37,6 +37,8 @@ public struct CouchDBSessions {
 		proxy.updated = s.updated
 		proxy.idle = SessionConfig.idle // update in case this has changed
 		proxy.data = s.data
+		proxy.ipaddress = s.ipaddress
+		proxy.useragent = s.useragent
 
 		// save
 		do {
@@ -58,7 +60,9 @@ public struct CouchDBSessions {
 			created: session.created,
 			updated: session.updated,
 			idle: session.idle,
-			data: session.data
+			data: session.data,
+			ipaddress: session.ipaddress,
+			useragent: session.useragent
 		)
 		try? proxy.save()
 		return session
@@ -96,6 +100,8 @@ public struct CouchDBSessions {
 			session.updated = proxy.updated
 			session.idle = SessionConfig.idle // update in case this has changed
 			session.data = proxy.data
+			session.ipaddress = proxy.ipaddress
+			session.useragent = proxy.useragent
 		} catch {
 			print("Error retrieving session: \(error)")
 		}
