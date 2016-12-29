@@ -36,7 +36,6 @@ extension SessionCouchDBFilter: HTTPRequestFilter {
 			let session = driver.resume(token: token)
 			if session.isValid(request) {
 				request.session = session
-				// print("Session: token \(session.token); created \(session.created); updated \(session.updated)")
 				createSession = false
 			} else {
 				driver.destroy(token: token)
@@ -44,8 +43,7 @@ extension SessionCouchDBFilter: HTTPRequestFilter {
 		}
 		if createSession {
 			//start new session
-			request.session = driver.start()
-			// print("Session (new): token \(request.session.token); created \(request.session.created); updated \(request.session.updated)")
+			request.session = driver.start(request)
 
 		}
 

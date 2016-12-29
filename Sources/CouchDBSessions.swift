@@ -9,7 +9,7 @@
 import TurnstileCrypto
 import CouchDBStORM
 import PerfectSession
-
+import PerfectHTTP
 
 public struct CouchDBSessions {
 
@@ -48,10 +48,12 @@ public struct CouchDBSessions {
 		}
 	}
 
-	public func start() -> PerfectSession {
+	public func start(_ request:HTTPRequest) -> PerfectSession {
 		let rand = URandom()
 		var session = PerfectSession()
 		session.token = rand.secureToken
+		session.ipaddress = request.remoteAddress.host
+		session.useragent = request.header(.userAgent) ?? "unknown"
 
 		// perform INSERT
 		let proxy = PerfectSessionClass(
