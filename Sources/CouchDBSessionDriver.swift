@@ -67,7 +67,7 @@ extension SessionCouchDBFilter: HTTPRequestFilter {
 				}
 			}
 		}
-
+		CORSheaders.make(request, response)
 		callback(HTTPRequestFilterResult.continue(request, response))
 	}
 }
