@@ -2,3 +2,6 @@
 /.build
 /Packages
 /*.xcodeproj
+Package.swift.orig
+LinuxMain*
+Perfect_Session*Tests.swift
