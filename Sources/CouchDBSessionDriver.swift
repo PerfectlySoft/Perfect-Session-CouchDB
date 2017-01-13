@@ -54,7 +54,7 @@ extension SessionCouchDBFilter: HTTPRequestFilter {
 			//print("Check CSRF Request: \(CSRFFilter.filter(request))")
 			if !CSRFFilter.filter(request) {
 
-				switch SessionConfig.CSRFfailAction {
+				switch SessionConfig.CSRF.failAction {
 				case .fail:
 					response.status = .notAcceptable
 					callback(.halt(request, response))
@@ -98,7 +98,7 @@ extension SessionCouchDBFilter: HTTPResponseFilter {
 			)
 
 			// CSRF Set Cookie
-			if SessionConfig.CSRFCheckState {
+			if SessionConfig.CSRF.checkState {
 				//print("in SessionConfig.CSRFCheckState")
 				CSRFFilter.setCookie(response)
 			}
