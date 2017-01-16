@@ -52,7 +52,7 @@ The master branch of this project currently compiles with **Xcode 8.1** or the *
 Add this project as a dependency in your Package.swift file.
 
 ``` swift
-.Package(url:"https://github.com/PerfectlySoft/Perfect-Session-CouchDB.git", majorVersion: 0, minor: 0)
+.Package(url:"https://github.com/PerfectlySoft/Perfect-Session-CouchDB.git", majorVersion: 1)
 ```
 
 
