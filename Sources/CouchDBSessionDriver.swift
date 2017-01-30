@@ -40,7 +40,7 @@ extension SessionCouchDBFilter: HTTPRequestFilter {
 				request.session = session
 				createSession = false
 			} else {
-				driver.destroy(token: token)
+				driver.destroy(request, response)
 			}
 		}
 		if createSession {
