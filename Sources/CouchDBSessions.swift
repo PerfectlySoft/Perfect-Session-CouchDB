@@ -16,6 +16,26 @@ public struct CouchDBSessions {
 	/// Initializes the Session Manager. No config needed!
 	public init() {}
 
+	public func clean() {
+//		let stmt = "DELETE FROM \(PostgresSessionConnector.table) WHERE updated + idle < $1"
+//		exec(stmt, params: [Int(Date().timeIntervalSince1970)])
+
+		let proxy = PerfectSessionClass()
+		do {
+			do {
+				try proxy.find(["updated":["$lt": (Int(Date().timeIntervalSince1970) - SessionConfig.idle)]])
+				proxy.to(proxy.results.rows[0])
+			} catch {
+				print("Error retrieving session: \(error)")
+			}
+			for e in proxy.rows() {
+				try e.delete()
+			}
+		} catch {
+			print(error)
+		}
+	}
+
 
 	public func save(session: PerfectSession) {
 		var s = session
