@@ -24,7 +24,9 @@ public struct CouchDBSessions {
 		do {
 			do {
 				try proxy.find(["updated":["$lt": (Int(Date().timeIntervalSince1970) - SessionConfig.idle)]])
-				proxy.to(proxy.results.rows[0])
+                if proxy.results.rows.count > 0 {
+                    proxy.to(proxy.results.rows[0])
+                }
 			} catch {
 				print("Error retrieving session: \(error)")
 			}
